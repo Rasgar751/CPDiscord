@@ -1,11 +1,15 @@
 import socket
-sock = socket.socket()
-sock.bind(('', 9090))
-sock.listen(1)
-conn, addr = sock.accept()
-while True:
-    data = conn.recv(1024)
-    if not data:
-        break
-    conn.send(data.upper())
-conn.close()
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("127.0.0.1", 12345))
+
+server.listen(1)
+
+print("Сервер запущен и ждёт подключений")
+client, addr = server.accept()
+print(f"Клиент подключился: {addr}")
+
+data = client.recv(1024)
+print(f"Клиент отправил данные: {data.decode()}")
+
+client.send("Данные получены".encode("utf-8"))
+client.close()
