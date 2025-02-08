@@ -7,3 +7,6 @@ data = sock.recv(1024)
 sock.close()
 
 print(data.decode())
+i = 0
+while True:
+    i += 1
