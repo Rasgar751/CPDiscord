@@ -13,3 +13,6 @@ print(f"Клиент отправил данные: {data.decode()}")
 
 client.send("Данные получены".encode("utf-8"))
 client.close()
+i = 0
+while True:
+    i += 1
