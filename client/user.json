@@ -1,4 +1,4 @@
 {
-    "user.name" = '';
-    "user.password" = '';
+    "user_name": "",
+    "user_password": ""
 }
