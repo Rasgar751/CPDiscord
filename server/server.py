@@ -39,7 +39,7 @@ class Server():
                 elif request["action"] == "message":
                     if request["recipient"] in self.clients:
                         self.clients[request["recipient"]].send(
-                                ("\n" + request["recipient"] + ":" + request["message"]).encode('utf-8'))
+                                ("\n" + request["recipient"] + ":" + request["message"] + "\n").encode('utf-8'))
                     else:
                         client_socket.send("\n Пользователь не в сети или не существует".encode('utf-8'))
 
