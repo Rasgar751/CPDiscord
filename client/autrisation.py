@@ -1,9 +1,11 @@
 import json
+import pathlib
 
-
+user_directory = pathlib.Path.cwd()
+print(user_directory)
 #Функция для авторизации и регистрации, и вообще кучи всего.
 def is_authorized(client):
-    with open('user.json', 'r') as json_file:
+    with open(user_directory / 'user.json', 'r') as json_file:
         data = json.load(json_file)  
         user_name = data["user_name"]
         user_password = data["user_password"]
@@ -35,7 +37,7 @@ def is_authorized(client):
                     if response["status"] == 'success':
                         user_json = {"user_name": request["user_name"],
                                      "user_password": request["user_password"]}
-                        with open('user.json', 'w') as json_file:
+                        with open(user_directory / 'user.json', 'w') as json_file:
                             json.dump(user_json, json_file, ensure_ascii=False, indent=4)
                         print(response["message"])
                         print("Вход выполнен")
@@ -54,7 +56,7 @@ def is_authorized(client):
                     if response["status"] == 'success':
                         user_json = {"user_name": request["user_name"],
                                      "user_password": request["user_password"]}
-                        with open('user.json', 'w') as json_file:
+                        with open(user_directory / 'user.json', 'w') as json_file:
                             json.dump(user_json, json_file, ensure_ascii=False, indent=4)
                         print(response["message"])
                         break
@@ -62,4 +64,4 @@ def is_authorized(client):
                         print(response["message"])
                         print("Попробуйте ещё раз")
             else:
-                print("Ты дурак? Чёрным по белому написано нужно выбрать 1 или 2, иного не дано!!!")
+                print("Можно вводить только 1 или 2 0_0")
