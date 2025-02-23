@@ -1,7 +1,7 @@
 import json
 import pathlib
 
-user_directory = pathlib.Path.cwd()
+user_directory = pathlib.Path(__file__).parent.absolute()
 print(user_directory)
 #Функция для авторизации и регистрации, и вообще кучи всего.
 def is_authorized(client):
