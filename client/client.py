@@ -23,7 +23,7 @@ class Client():
         # Настройка клиента
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # Для применения на локальной машине
-        # server.bind(('127.0.0.1', 1234))
+        # client.connect(('127.0.0.1', 1234))
         client.connect(('185.185.69.218', 5555))
 
         is_authorized(client)

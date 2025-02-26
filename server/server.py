@@ -14,9 +14,9 @@ class Server():
             try:
                 # Получаем сообщение от клиента в формате json
                 data = client_socket.recv(1024).decode('utf-8')
-                request = json.loads(data)
                 if not data:
                     continue
+                request = json.loads(data)
                 if request["action"] == "registration":
                     username = request["user_name"] 
                     password = request["user_password"]
@@ -44,9 +44,10 @@ class Server():
                         client_socket.send("\n Пользователь не в сети или не существует".encode('utf-8'))
 
             except Exception as ex:
-                print("Попали в except")
+                print(f"Клиент: {addr} попал в except")
                 print(ex)
-                continue
+                client_socket.close()
+                break
 
     #Функция запуска сервера
     def start(self):
