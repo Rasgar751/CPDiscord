@@ -3,6 +3,9 @@ from db_manage import Db_Manager
 import socket
 import threading
 import json
+import logging
+
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 class Server():
     def __init__(self):
@@ -46,6 +49,7 @@ class Server():
             except Exception as ex:
                 print(f"Клиент: {addr} попал в except")
                 print(ex)
+                logging.error(f"Клиент: {addr} получил ошибку: {ex}")
                 client_socket.close()
                 break
 
@@ -53,16 +57,18 @@ class Server():
     def start(self):
         # Настройка сервера
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # Для применения на локальной машине
-        # server.bind(('127.0.0.1', 1234))
+        #Для применения на локальной машине
+        #server.bind(('127.0.0.1', 1234))
         server.bind(('185.185.69.218', 5555))
         server.listen()
 
         print("Сервер запущен и ожидает подключений...")
+        logging.info("Сервер запущен и ожидает подключений...")
 
         while True:
             client_socket, addr = server.accept()
             print(f"Подключен клиент: {addr}")
+            logging.info(f"Подключен клиент: {addr}")
             # Запускаем поток для обработки клиента
             client_thread = threading.Thread(target=self.handle_client, args=(client_socket, addr))
             client_thread.start()
